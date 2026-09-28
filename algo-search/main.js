@@ -231,10 +231,10 @@ function startGame(algo) {
 
   if (algo === 'linear') {
     currentAlgoTitleEl.textContent = '線形探索';
-    guideMessageEl.textContent = '左端から順番に探してください。';
+    guideMessageEl.textContent = '左端から順番に探してください。（※整列済みです。）';
   } else {
     currentAlgoTitleEl.textContent = '二分探索';
-    guideMessageEl.textContent = '真ん中のカードを開いて範囲を絞り込んでください。';
+    guideMessageEl.textContent = '真ん中のカードを開いて範囲を絞り込んでください。（※整列済みです。）';
   }
 
   stepCount = 0;

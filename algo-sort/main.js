@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            const msg = `未整列部分から最小値を探し、左端のカードと入れ替えてください。（※左端が最小ならそのままでOK。）`;
+            const msg = `未整列部分から最小値を探し、左端のカードと入れ替えてください。（※始めから左端が最小ならそのままでOK。）`;
             const targetValues = [tempArr[i]]; 
 
             const fixedIndices = [];
