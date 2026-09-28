@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function finishGame() {
         actionArea.classList.add('hidden');
         resultArea.classList.remove('hidden');
-        resultMessage.textContent = `完了しました。手数は${moveCount}回でした。`;
+        resultMessage.textContent = `完了しました。比較回数は${moveCount}回でした。`;
         
         // 全ての位置を確定として描画
         const allIndices = globalInitialArray.map((_, i) => i);
