@@ -51,7 +51,7 @@ function toFullWidth(str) {
   });
 }
 
-const CARD_COUNT = 30;
+let CARD_COUNT = 30;
 
 let currentMode = 'number';
 let currentAlgo = null;
@@ -90,10 +90,30 @@ const btnRetrySame = document.getElementById('btn-retry-same');
 const btnRetryDiff = document.getElementById('btn-retry-diff');
 const retryControls = document.getElementById('retry-controls');
 
+const linkToggleMode = document.getElementById('link-toggle-mode');
+
 btnStartLinear.addEventListener('click', () => { startGame('linear'); });
 btnStartBinary.addEventListener('click', () => { startGame('binary'); });
 radioNumber.addEventListener('change', () => { setMode('number'); });
 radioWord.addEventListener('change', () => { setMode('word'); });
+
+linkToggleMode.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (CARD_COUNT === 30) {
+    CARD_COUNT = 100;
+    linkToggleMode.textContent = '30枚モードに戻す';
+  } else {
+    CARD_COUNT = 30;
+    linkToggleMode.textContent = '100枚モードにする';
+  }
+  isPlaying = false;
+  currentAlgo = null;
+  controlsEl.classList.remove('hidden');
+  gameInfoEl.classList.add('hidden');
+  resultMessageEl.textContent = '';
+  retryControls.classList.add('hidden');
+  previewGame();
+});
 
 btnRetrySame.addEventListener('click', () => {
   isPlaying = false; // 初期状態に戻す
@@ -178,7 +198,12 @@ function generateDataset() {
     }
 
     if (currentMode === 'number') {
-      const num = Math.floor(r * 90) + 10;
+      let num;
+      if (CARD_COUNT === 100) {
+        num = Math.floor(r * 900) + 100; // 3 digits
+      } else {
+        num = Math.floor(r * 90) + 10;   // 2 digits
+      }
       if (!dataset.includes(num)) {
         dataset.push(num);
       }
@@ -231,10 +256,18 @@ function startGame(algo) {
 
   if (algo === 'linear') {
     currentAlgoTitleEl.textContent = '線形探索';
-    guideMessageEl.textContent = '左端から順番に探してください。（※整列済みです。）';
+    if (currentMode === 'word') {
+      guideMessageEl.textContent = '左端から順番に探してください。（※五十音順に並んでいます。）';
+    } else {
+      guideMessageEl.textContent = '左端から順番に探してください。（※番号順に並んでいます。）';
+    }
   } else {
     currentAlgoTitleEl.textContent = '二分探索';
-    guideMessageEl.textContent = '真ん中のカードを開いて範囲を絞り込んでください。（※整列済みです。）';
+    if (currentMode === 'word') {
+      guideMessageEl.textContent = '真ん中のカードを開いて範囲を絞り込んでください。（※五十音順に並んでいます。）';
+    } else {
+      guideMessageEl.textContent = '真ん中のカードを開いて範囲を絞り込んでください。（※番号順に並んでいます。）';
+    }
   }
 
   stepCount = 0;
