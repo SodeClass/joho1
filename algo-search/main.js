@@ -100,11 +100,13 @@ radioWord.addEventListener('change', () => { setMode('word'); });
 linkToggleMode.addEventListener('click', (e) => {
   e.preventDefault();
   if (CARD_COUNT === 30) {
-    CARD_COUNT = 100;
+    CARD_COUNT = 99;
     linkToggleMode.textContent = '30枚モードに戻す';
+    document.body.classList.add('mode-99');
   } else {
     CARD_COUNT = 30;
-    linkToggleMode.textContent = '100枚モードにする';
+    linkToggleMode.textContent = '99枚モードにする';
+    document.body.classList.remove('mode-99');
   }
   isPlaying = false;
   currentAlgo = null;
@@ -199,7 +201,7 @@ function generateDataset() {
 
     if (currentMode === 'number') {
       let num;
-      if (CARD_COUNT === 100) {
+      if (CARD_COUNT === 99) {
         num = Math.floor(r * 900) + 100; // 3 digits
       } else {
         num = Math.floor(r * 90) + 10;   // 2 digits
@@ -341,7 +343,7 @@ function handleCardClick(index) {
     
     if (dataset[index] === targetValue) {
       isCompleted = true;
-      resultMessageEl.textContent = `完了しました。手数は${stepCount}回でした`;
+      resultMessageEl.textContent = `完了しました。探索回数は${stepCount}回でした。`;
       retryControls.classList.remove('hidden');
     }
     return;
@@ -356,7 +358,7 @@ function handleCardClick(index) {
     
     if (dataset[index] === targetValue) {
       isCompleted = true;
-      resultMessageEl.textContent = `完了しました。手数は${stepCount}回でした`;
+      resultMessageEl.textContent = `完了しました。探索回数は${stepCount}回でした。`;
       retryControls.classList.remove('hidden');
     } else {
       if (currentAlgo === 'linear') {

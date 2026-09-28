@@ -187,6 +187,10 @@ button:active {
     gap: 3px;
 }
 
+body.mode-99 #minimap-cards {
+    gap: 1px;
+}
+
 .mini-card {
     flex: 1;
     box-sizing: border-box;
@@ -194,6 +198,11 @@ button:active {
     border: 3px solid #cbd5e1;
     border-radius: 3px;
     transition: background-color 0.3s, border-color 0.3s;
+}
+
+body.mode-99 .mini-card {
+    border: 1px solid #cbd5e1;
+    border-radius: 1px;
 }
 
 .mini-card.revealed {
@@ -303,6 +312,10 @@ button:active {
     border: 5px solid #cbd5e1;
     box-sizing: border-box;
     transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+body.mode-99 .card-face {
+    font-size: 15pt;
 }
 
 .card-front {
